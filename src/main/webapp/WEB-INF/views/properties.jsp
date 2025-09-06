@@ -134,8 +134,9 @@
             %>
             <div class="property-card">
                 <span class="status-badge <%= property.getStatus() %>"><%= property.getStatus() %></span>
-                <img class="property-img" src="<%= request.getContextPath() %>/images/<%= (property.getImagePath() != null ? property.getImagePath() : "default.jpg") %>" alt="<%= property.getName() %>">
-                <div class="property-content">
+				<img src="<%= request.getContextPath() %>/images/<%= (property.getImagePath() != null ? property.getImagePath() : "default.jpg") %>" 
+				     alt="<%= property.getName() %>">
+
                     <h3 class="property-title"><%= property.getName() %></h3>
                     <p class="property-location"><i class="fas fa-map-marker-alt"></i> <%= property.getLocation() %></p>
                     <p class="property-price">€ <%= property.getPrice() %></p>

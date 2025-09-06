@@ -88,7 +88,9 @@
                     for(Property property : properties){
             %>
             <div class="card">
-                <img src="<%= request.getContextPath() %>/images/<%= (property.getImagePath() != null ? property.getImagePath() : "default.jpg") %>" alt="<%= property.getName() %>">
+				<img src="<%= request.getContextPath() %>/images/<%= (property.getImagePath() != null ? property.getImagePath() : "default.jpg") %>" 
+				     alt="<%= property.getName() %>">
+
                 <div class="card-body">
                     <h3><%= property.getName() %></h3>
                     <p><%= property.getLocation() %></p>
