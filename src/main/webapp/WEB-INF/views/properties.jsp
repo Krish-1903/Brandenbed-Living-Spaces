@@ -134,8 +134,8 @@
             %>
             <div class="property-card">
                 <span class="status-badge <%= property.getStatus() %>"><%= property.getStatus() %></span>
-				<img src="${pageContext.request.contextPath}${property.imagePath != null ? property.imagePath : '/images/default.jpg'}"
-				     alt="${property.name}" />
+				<img src="<%= request.getContextPath() + (property.getImagePath() != null ? property.getImagePath() : "/images/default.jpg") %>"
+				     alt="<%= property.getName() %>" />
 
 
                     <h3 class="property-title"><%= property.getName() %></h3>
