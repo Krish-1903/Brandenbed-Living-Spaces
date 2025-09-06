@@ -217,31 +217,32 @@ public class MainController {
 	                          HttpServletRequest request) throws IOException {
 
 	    HttpSession session = request.getSession(false);
-	    if(session == null || session.getAttribute("un") == null) {
-	        return "redirect:/admin"; 
+	    if (session == null || session.getAttribute("un") == null) {
+	        return "redirect:/admin";
 	    }
 
 	    String username = (String) session.getAttribute("un");
 	    Admin admin = adminService.findByUsername(username);
 
-	    // Save the uploaded file
-	    if (!file.isEmpty()) {
-	        String uploadsDir = request.getServletContext().getRealPath("/images/");
+	    // Save the uploaded file in container folder
+	    if (file != null && !file.isEmpty()) {
+	        String uploadsDir = System.getProperty("user.dir") + "/uploads";  // container-safe folder
 	        File dir = new File(uploadsDir);
 	        if (!dir.exists()) dir.mkdirs();
 
 	        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-	        file.transferTo(new File(dir, fileName));
+	        File dest = new File(dir, fileName);
+	        file.transferTo(dest);
 
-	        property.setImagePath(fileName);  // save the filename in DB
+	        property.setImagePath("/uploads/" + fileName);  // save relative path in DB
 	    }
 
 	    property.setAdmin(admin);
 	    propertyService.addProperty(property);
 
-	    // Redirect to property list
 	    return "redirect:/admin/propertiesList";
 	}
+
 	
 	@PostMapping("/admin/deleteProperty")
 	public String deleteProperty(@RequestParam("id") long id) {
